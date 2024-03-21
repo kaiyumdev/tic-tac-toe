@@ -15,7 +15,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-export default function Board() {
+function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
@@ -41,6 +41,7 @@ export default function Board() {
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
   }
+
   return (
     <>
       <div>{status}</div>
@@ -87,6 +88,18 @@ export default function Board() {
         ></Square>
       </div>
     </>
+  );
+}
+export default function Game() {
+  return (
+    <div>
+      <div>
+        <Board></Board>
+      </div>
+      <div>
+        <ul></ul>
+      </div>
+    </div>
   );
 }
 
