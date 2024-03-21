@@ -19,6 +19,15 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
+  const winner = calculateWinner(squares);
+  let status;
+
+  if (winner) {
+    status = `Winner: ${winner}`;
+  } else {
+    status = "Next Player: " + (xIsNext ? "X" : "o");
+  }
+
   function handleClick(i) {
     if (squares[i]) {
       return;
