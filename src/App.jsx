@@ -22,9 +22,9 @@ export default function Board() {
   function handleClick(i) {
     const nextSquares = squares.slice();
     if (xIsNext) {
-      setSquares[i] = "X";
+      nextSquares[i] = "X";
     } else {
-      setSquares[i] = "o";
+      nextSquares[i] = "o";
     }
     setSquares(nextSquares);
     setXIsNext(!xIsNext);
