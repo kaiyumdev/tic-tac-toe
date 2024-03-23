@@ -1,15 +1,17 @@
-/* eslint-disable react/jsx-key */
 /* eslint-disable react/prop-types */
-/* eslint-disable no-unused-vars */
-
+/*
+   Game
+    -> Board
+        -> Square
+    -> History
+*/
 import { useState } from "react";
 
-/* eslint-disable react-refresh/only-export-components */
 function Square({ value, onSquareClick }) {
   return (
     <button
+      className="bg-white border border-gray-400 h-12 w-12 m-1 leading-9 text-lg"
       onClick={onSquareClick}
-      className="bg-white m-10 p-10 border border-gray-400 h-12 w-12 m-1 leading-9 text-lg m-7"
     >
       {value}
     </button>
@@ -23,10 +25,10 @@ function Board({ xIsNext, squares, onPlay }) {
   if (winner) {
     status = `Winner: ${winner}`;
   } else {
-    status = "Next Player: " + (xIsNext ? "X" : "o");
+    status = "Next Player " + (xIsNext ? "X" : "O");
   }
 
-  function handleClick(i) {
+  function handClick(i) {
     if (squares[i] || calculateWinner(squares)) {
       return;
     }
@@ -34,65 +36,41 @@ function Board({ xIsNext, squares, onPlay }) {
     if (xIsNext) {
       nextSquares[i] = "X";
     } else {
-      nextSquares[i] = "o";
+      nextSquares[i] = "O";
     }
     onPlay(nextSquares);
   }
-
   return (
     <>
       <div>{status}</div>
       <div className="flex">
-        <Square
-          value={squares[0]}
-          onSquareClick={() => handleClick(0)}
-        ></Square>
-        <Square
-          value={squares[1]}
-          onSquareClick={() => handleClick(1)}
-        ></Square>
-        <Square
-          value={squares[2]}
-          onSquareClick={() => handleClick(2)}
-        ></Square>
+        <Square value={squares[0]} onSquareClick={() => handClick(0)} />
+        <Square value={squares[1]} onSquareClick={() => handClick(1)} />
+        <Square value={squares[2]} onSquareClick={() => handClick(2)} />
       </div>
+
       <div className="flex">
-        <Square
-          value={squares[3]}
-          onSquareClick={() => handleClick(3)}
-        ></Square>
-        <Square
-          value={squares[4]}
-          onSquareClick={() => handleClick(4)}
-        ></Square>
-        <Square
-          value={squares[5]}
-          onSquareClick={() => handleClick(5)}
-        ></Square>
+        <Square value={squares[3]} onSquareClick={() => handClick(3)} />
+        <Square value={squares[4]} onSquareClick={() => handClick(4)} />
+        <Square value={squares[5]} onSquareClick={() => handClick(5)} />
       </div>
+
       <div className="flex">
-        <Square
-          value={squares[6]}
-          onSquareClick={() => handleClick(6)}
-        ></Square>
-        <Square
-          value={squares[7]}
-          onSquareClick={() => handleClick(7)}
-        ></Square>
-        <Square
-          value={squares[8]}
-          onSquareClick={() => handleClick(8)}
-        ></Square>
+        <Square value={squares[6]} onSquareClick={() => handClick(6)} />
+        <Square value={squares[7]} onSquareClick={() => handClick(7)} />
+        <Square value={squares[8]} onSquareClick={() => handClick(8)} />
       </div>
     </>
   );
 }
+
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [xIsNext, setXIsNext] = useState(true);
   const [currentMove, setCurrentMove] = useState(0);
 
   const currentSquares = history[currentMove];
+
   function handlePlay(nextSquares) {
     setXIsNext(!xIsNext);
     const nextHistory = [...history.slice(0, currentMove + 1), nextSquares];
@@ -113,22 +91,19 @@ export default function Game() {
       description = `Go to start the game`;
     }
     return (
-      <li key={move}>
+      <li key={move} className="bg-gray-700 text-white mb-1 p-1 rounded-sm">
         <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     );
   });
+
   return (
-    <div>
-      <div>
-        <Board
-          xIsNext={xIsNext}
-          squares={currentSquares}
-          onPlay={handlePlay}
-        ></Board>
+    <div className="flex justify-center p-4">
+      <div className="mr-16">
+        <Board xIsNext={xIsNext} squares={currentSquares} onPlay={handlePlay} />
       </div>
       <div>
-        <ol>{moves}</ol>
+        <ol className="border border-gray-400 p-1 text-lg">{moves}</ol>
       </div>
     </div>
   );
