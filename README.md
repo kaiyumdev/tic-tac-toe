@@ -14,8 +14,8 @@ To install the app, clone the repository and run the following commands:
 ```
 c2f7488a-96f4-49e6-9730-e0724f9ef78a
 
-npm install
-npm start
+npm install or yarn
+npm start or yarn dev
 
 ```
 
