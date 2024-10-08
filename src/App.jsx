@@ -8,9 +8,10 @@
 */
 import { useState } from "react";
 
-function Square({ value }) {
+function Square() {
+  const [value, setValue] = useState(null);
   const handleClick = () => {
-    console.log('click', value);
+    setValue("X")
   }
   return (
     <button
