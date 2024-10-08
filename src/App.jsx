@@ -25,6 +25,9 @@ export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
   const handleClick = (i) => {
+    if (squares[i]) {
+      return;
+    }
     //clone or duplicate square values
     const nextSquare = squares.slice();
     if (xIsNext) {
