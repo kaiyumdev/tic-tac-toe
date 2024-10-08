@@ -24,9 +24,10 @@ function Square({ value, onSquareClick }) {
 export default function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const handleClick = () => {
-    squares[0] = "x";
     //clone or duplicate square values
-    setSquares([...squares]);
+    const nextSquare = squares.slice();
+    nextSquare[0] = "X";
+    setSquares(nextSquare);
   }
   return (
     <>
