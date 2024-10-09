@@ -21,7 +21,7 @@ function Square({ value, onSquareClick }) {
   );
 }
 
-export default function Board() {
+function Board() {
   const [squares, setSquares] = useState(Array(9).fill(null));
   const [xIsNext, setXIsNext] = useState(true);
 
@@ -34,7 +34,7 @@ export default function Board() {
     status = `Next player: ${xIsNext ? 'X' : 'O'}`;
   }
   const handleClick = (i) => {
-    if (squares[i]) {
+    if (squares[i] || calculateWinner(squares)) {
       return;
     }
     //clone or duplicate square values
@@ -70,6 +70,21 @@ export default function Board() {
 
 }
 
+
+export default function Game() {
+  const [squares, setSquares] = useState(Array(9).fill(null));
+  const [xIsNext, setXIsNext] = useState(true);
+  return (
+    <div>
+      <div>
+        <Board></Board>
+      </div>
+      <div>
+        {/* <ol>{ TBD }</ol> */}
+      </div>
+    </div>
+  )
+}
 
 //create calculateWinner function
 function calculateWinner(squares) {
