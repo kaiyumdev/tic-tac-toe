@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 /*
@@ -78,6 +79,20 @@ export default function Game() {
     setXIsNext(!xIsNext);
     setHistory([...history, nextSquare])
   }
+
+  const moves = history.map((squares, move) => {
+    let description;
+    if (move > 0) {
+      description = `Go to the move # ${move}`;
+    } else {
+      description = `Go to start the game`;
+    }
+    return (
+      <li>
+        <button>{description}</button>
+      </li>
+    )
+  })
   return (
     <div>
       <div>
