@@ -42,6 +42,7 @@ function Board({ xIsNext, squares, onPly }) {
     } else {
       nextSquare[i] = 'O';
     }
+    onPly(nextSquare)
   }
   return (
     <>
