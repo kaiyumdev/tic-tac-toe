@@ -74,11 +74,15 @@ export default function Game() {
   const [xIsNext, setXIsNext] = useState(true);
   const [currentMove, setCurrentMove] = useState(0);
 
-  const currentSquares = history[history.length - 1];
+  // const currentSquares = history[history.length - 1];
+  const currentSquares = history[currentMove];
 
   function handlePlay(nextSquare) {
     setXIsNext(!xIsNext);
-    setHistory([...history, nextSquare])
+    const nextHistory = [...history.slice(0, currentMove + 1), nextSquare]
+    // setHistory([...history, nextSquare])
+    setHistory(nextHistory);
+    setCurrentMove(nextHistory.length - 1);
   }
 
   function jumpTo(move) {
@@ -95,7 +99,7 @@ export default function Game() {
     }
     return (
       <li key={move}>
-        <button>{description}</button>
+        <button onClick={() => jumpTo(move)}>{description}</button>
       </li>
     )
   })
@@ -105,7 +109,7 @@ export default function Game() {
         <Board xIsNext={xIsNext} squares={currentSquares} onPly={handlePlay}></Board>
       </div>
       <div>
-        <ol onClick={() => jumpTo(move)}> {moves}</ol>
+        <ol> {moves}</ol>
       </div>
     </div>
   )
