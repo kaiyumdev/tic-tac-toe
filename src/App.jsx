@@ -66,7 +66,7 @@ function Board({ xIsNext, squares, onPly }) {
 
 }
 
-
+//Game components
 export default function Game() {
   const [history, setHistory] = useState([Array(9).fill(null)]);
   const [xIsNext, setXIsNext] = useState(true);
